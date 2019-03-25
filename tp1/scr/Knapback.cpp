@@ -25,11 +25,14 @@ void Knapback::solveKnapback(int requestsIndex) {
             this->partialMaximum = this->sumSelectedRequestsBenefits();
         }
     }else{
-        this->electionTree.at(requestsIndex) = SELECTED_BRANCH;
-        this->solveKnapback(requestsIndex+1);
+        if( this->strategyOptimization() ){
 
-        this->electionTree.at(requestsIndex) = NO_SELECTED_BRANCH;
-        this->solveKnapback(requestsIndex+1);
+            this->electionTree.at(requestsIndex) = SELECTED_BRANCH;
+            this->solveKnapback(requestsIndex+1);
+
+            this->electionTree.at(requestsIndex) = NO_SELECTED_BRANCH;
+            this->solveKnapback(requestsIndex+1);
+        }
     }
 }
 
@@ -57,4 +60,12 @@ int Knapback::sumSelectedRequestsBenefits() {
         }
     }
     return summatory;
+}
+
+bool Knapback::strategyOptimization() {
+    return this->strategy->strategyOptimization();
+}
+
+void Knapback::setDecitionTreeStrategy(DesitionTreeStrategy *pForce) {
+    this->strategy = pForce;
 }

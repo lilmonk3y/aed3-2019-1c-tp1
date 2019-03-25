@@ -7,16 +7,20 @@
 
 
 #include "Request.h"
+#include "DesitionTreeStrategy.h"
 
 class Knapback {
 public:
-
     int maximumBenefit(int capacity, std::vector <Request> *requests);
+
+    void setDecitionTreeStrategy(DesitionTreeStrategy *pForce);
+
 private:
     std::vector<Request> *requests;
     int capacity;
     int partialMaximum;
     std::vector<int> electionTree;
+    DesitionTreeStrategy *strategy;
 
     void solveKnapback(int requestsIndex);
 
@@ -27,6 +31,8 @@ private:
     int sumSelectedRequestsBenefits();
 
     bool isABetterSolution();
+
+    bool strategyOptimization();
 };
 
 

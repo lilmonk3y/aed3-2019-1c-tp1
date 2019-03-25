@@ -3,14 +3,16 @@
 //
 
 #include <gtest/gtest.h>
-#include "../scr/brute_force/Knapback.h"
-#include "../scr/brute_force/Request.h"
+#include "../scr/Knapback.h"
+#include "../scr/Request.h"
+#include "../scr/brute_force/BruteForce.h"
 
 struct KnapbackTest : testing::Test{
     Knapback *knapback;
 
     KnapbackTest(){
         knapback = new Knapback();
+        knapback->setDecitionTreeStrategy(new BruteForce());
     }
 
     ~KnapbackTest(){
