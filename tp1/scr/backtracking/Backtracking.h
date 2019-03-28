@@ -9,7 +9,22 @@
 #include "../DesitionTreeStrategy.h"
 
 class Backtracking : public DesitionTreeStrategy {
-    bool strategyOptimization();
+public:
+    bool
+    strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
+                             int capacity, int actualMaximum) override;
+
+    int sumSelectedRequestsCosts(int index, std::vector<int> *electionTree, std::vector<Request> *requests);
+
+    bool factabilityCut(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
+                        int capacity);
+
+    int sumSelectedRequestsBenefits(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests);
+
+    int sumNextRequestsBenefits(int requestsIndex, std::vector<Request> *requests);
+
+    bool optimalityCut(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
+                       int actualMaximum);
 };
 
 

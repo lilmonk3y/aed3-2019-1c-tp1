@@ -13,7 +13,7 @@ int Knapback::maximumBenefit(int capacity, std::__1::vector <Request> *requests)
     this->requests = requests;
     this->capacity = capacity;
     this->partialMaximum = 0;
-    this->electionTree.resize(requests->size());
+    this->electionTree = new std::vector<int>(requests->size());
 
     this->solveKnapback(0);
     return this->partialMaximum;
@@ -25,12 +25,12 @@ void Knapback::solveKnapback(int requestsIndex) {
             this->partialMaximum = this->sumSelectedRequestsBenefits();
         }
     }else{
-        if( this->strategyOptimization() ){
+        if(this->strategyOptimization(requestsIndex)){
 
-            this->electionTree.at(requestsIndex) = SELECTED_BRANCH;
+            this->electionTree->at(requestsIndex) = SELECTED_BRANCH;
             this->solveKnapback(requestsIndex+1);
 
-            this->electionTree.at(requestsIndex) = NO_SELECTED_BRANCH;
+            this->electionTree->at(requestsIndex) = NO_SELECTED_BRANCH;
             this->solveKnapback(requestsIndex+1);
         }
     }
@@ -44,8 +44,8 @@ bool Knapback::isValidActualSolution() {
 
 int Knapback::sumatoryOfActualSolution() {
     int summatory = 0;
-    for(int iterator = 0; iterator < this->electionTree.size(); iterator++){
-        if(this->electionTree.at(iterator) == SELECTED_BRANCH){
+    for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
+        if(this->electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += this->requests->at(iterator).cost;
         }
     }
@@ -54,18 +54,42 @@ int Knapback::sumatoryOfActualSolution() {
 
 int Knapback::sumSelectedRequestsBenefits() {
     int summatory = 0;
-    for(int iterator = 0; iterator < this->electionTree.size(); iterator++){
-        if(this->electionTree.at(iterator) == SELECTED_BRANCH){
+    for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
+        if(this->electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += this->requests->at(iterator).benefit;
         }
     }
     return summatory;
 }
 
-bool Knapback::strategyOptimization() {
-    return this->strategy->strategyOptimization();
+bool Knapback::strategyOptimization(int requestsIndex) {
+    return this->strategy->strategyOptimization(requestsIndex, this->electionTree, this->requests, this->capacity, this->partialMaximum);
 }
 
 void Knapback::setDecitionTreeStrategy(DesitionTreeStrategy *pForce) {
     this->strategy = pForce;
+}
+
+void Knapback::setRequests(std::vector<Request> *requests) {
+    this->requests = requests;
+}
+
+void Knapback::setCapacity(int capacity) {
+    this->capacity = capacity;
+}
+
+void Knapback::setElectionTree(std::vector<int> *electionTree) {
+    this->electionTree = electionTree;
+}
+
+std::vector<Request> * Knapback::getRequests() {
+    return this->requests;
+}
+
+std::vector<int> *Knapback::getElectionTree() {
+    return this->electionTree;
+}
+
+int Knapback::getCapacity() {
+    return this->capacity;
 }

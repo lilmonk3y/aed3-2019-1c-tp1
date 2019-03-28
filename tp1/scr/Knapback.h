@@ -15,11 +15,23 @@ public:
 
     void setDecitionTreeStrategy(DesitionTreeStrategy *pForce);
 
+    void setRequests(std::vector<Request> *requests);
+
+    void setCapacity(int capacity);
+
+    void setElectionTree(std::vector<int> *electionTree);
+
+    std::vector<Request> * getRequests();
+
+    std::vector<int> *getElectionTree();
+
+    int getCapacity();
+
 private:
     std::vector<Request> *requests;
     int capacity;
     int partialMaximum;
-    std::vector<int> electionTree;
+    std::vector<int> *electionTree;
     DesitionTreeStrategy *strategy;
 
     void solveKnapback(int requestsIndex);
@@ -32,7 +44,7 @@ private:
 
     bool isABetterSolution();
 
-    bool strategyOptimization();
+    bool strategyOptimization(int requestsIndex);
 };
 
 

@@ -6,13 +6,15 @@
 #include "../scr/Knapback.h"
 #include "../scr/Request.h"
 #include "../scr/brute_force/BruteForce.h"
+#include "../scr/backtracking/Backtracking.h"
 
 struct KnapbackTest : testing::Test{
     Knapback *knapback;
 
     KnapbackTest(){
         knapback = new Knapback();
-        knapback->setDecitionTreeStrategy(new BruteForce());
+        //knapback->setDecitionTreeStrategy(new BruteForce());
+        knapback->setDecitionTreeStrategy(new Backtracking());
     }
 
     ~KnapbackTest(){

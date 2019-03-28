@@ -5,11 +5,14 @@
 #ifndef TP1_MOCHILA_DESITIONTREESTRATEGY_H
 #define TP1_MOCHILA_DESITIONTREESTRATEGY_H
 
+#include <vector>
+#include "Request.h"
 
 class DesitionTreeStrategy {
 public:
-    virtual bool strategyOptimization() = 0;
+    virtual bool
+    strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
+                             int capacity, int actualMaximum) = 0;
 };
-
 
 #endif //TP1_MOCHILA_DESITIONTREESTRATEGY_H
