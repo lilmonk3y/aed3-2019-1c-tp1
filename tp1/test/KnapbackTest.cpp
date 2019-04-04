@@ -3,18 +3,20 @@
 //
 
 #include <gtest/gtest.h>
-#include "../scr/Knapback.h"
+#include "../scr/KnapbackDesitionTree.h"
 #include "../scr/Request.h"
 #include "../scr/brute_force/BruteForce.h"
 #include "../scr/backtracking/Backtracking.h"
+#include "../scr/Knapback.h"
+#include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
 
 struct KnapbackTest : testing::Test{
     Knapback *knapback;
 
     KnapbackTest(){
-        knapback = new Knapback();
-        //knapback->setDecitionTreeStrategy(new BruteForce());
-        knapback->setDecitionTreeStrategy(new Backtracking());
+        knapback = new KnapbackDesitionTree(new Backtracking());
+        knapback = new KnapbackDesitionTree(new BruteForce());
+        knapback = new MeetInTheMiddle();
     }
 
     ~KnapbackTest(){
