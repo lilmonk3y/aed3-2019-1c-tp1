@@ -6,7 +6,7 @@
 #define TP1_MOCHILA_BACKTRACKING_H
 
 
-#include "../DesitionTreeStrategy.h"
+#include "../brute_force/DesitionTreeStrategy.h"
 
 class Backtracking : public DesitionTreeStrategy {
 public:

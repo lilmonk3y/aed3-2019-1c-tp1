@@ -3,31 +3,32 @@
 //
 
 #include <vector>
-#include "KnapbackDesitionTree.h"
-#include "Request.h"
-#include "meet_in_the_middle/Solution.h"
+#include "KnapsackDesitionTree.h"
+#include "../Request.h"
+#include "../Solution.h"
 
 #define SELECTED_BRANCH 1
 #define NO_SELECTED_BRANCH 0
 
-KnapbackDesitionTree::KnapbackDesitionTree(DesitionTreeStrategy *pBacktracking) {
+KnapsackDesitionTree::KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking) {
     this->strategy = pBacktracking;
 }
 
-int KnapbackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request> *requests) {
+int KnapsackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request> *requests) {
     this->requests = requests;
     this->capacity = capacity;
     this->partialMaximum = 0;
     this->electionTree = new std::vector<int>(requests->size());
     this->solutions = new std::set<Solution>();
 
-    this->solveKnapback(0);
+    this->solveKnapsack(0);
     return this->partialMaximum;
 }
 
-void KnapbackDesitionTree::solveKnapback(int requestsIndex) {
+void KnapsackDesitionTree::solveKnapsack(int requestsIndex) {
     if(requestsIndex == this->requests->size()){
         this->solutions->insert(Solution(this->sumatoryOfActualSolution(),this->sumSelectedRequestsBenefits()));
+
         if(this->isValidActualSolution() && isABetterSolution()){
             this->partialMaximum = this->sumSelectedRequestsBenefits();
         }
@@ -35,21 +36,21 @@ void KnapbackDesitionTree::solveKnapback(int requestsIndex) {
         if(this->strategyOptimization(requestsIndex)){
 
             this->electionTree->at(requestsIndex) = SELECTED_BRANCH;
-            this->solveKnapback(requestsIndex+1);
+            this->solveKnapsack(requestsIndex + 1);
 
             this->electionTree->at(requestsIndex) = NO_SELECTED_BRANCH;
-            this->solveKnapback(requestsIndex+1);
+            this->solveKnapsack(requestsIndex + 1);
         }
     }
 }
 
-bool KnapbackDesitionTree::isABetterSolution() { return sumSelectedRequestsBenefits() > partialMaximum; }
+bool KnapsackDesitionTree::isABetterSolution() { return sumSelectedRequestsBenefits() > partialMaximum; }
 
-bool KnapbackDesitionTree::isValidActualSolution() {
+bool KnapsackDesitionTree::isValidActualSolution() {
     return this->sumatoryOfActualSolution() <= this->capacity;
 }
 
-int KnapbackDesitionTree::sumatoryOfActualSolution() {
+int KnapsackDesitionTree::sumatoryOfActualSolution() {
     int summatory = 0;
     for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
         if(this->electionTree->at(iterator) == SELECTED_BRANCH){
@@ -59,7 +60,7 @@ int KnapbackDesitionTree::sumatoryOfActualSolution() {
     return summatory;
 }
 
-int KnapbackDesitionTree::sumSelectedRequestsBenefits() {
+int KnapsackDesitionTree::sumSelectedRequestsBenefits() {
     int summatory = 0;
     for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
         if(this->electionTree->at(iterator) == SELECTED_BRANCH){
@@ -69,11 +70,11 @@ int KnapbackDesitionTree::sumSelectedRequestsBenefits() {
     return summatory;
 }
 
-bool KnapbackDesitionTree::strategyOptimization(int requestsIndex) {
+bool KnapsackDesitionTree::strategyOptimization(int requestsIndex) {
     return this->strategy->strategyOptimization(requestsIndex, this->electionTree, this->requests, this->capacity, this->partialMaximum);
 }
 
-std::set<Solution>* KnapbackDesitionTree::getSolutions() {
+std::set<Solution>* KnapsackDesitionTree::getSolutions() {
     return this->solutions;
 }
 

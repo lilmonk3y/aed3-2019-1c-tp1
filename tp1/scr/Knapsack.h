@@ -8,7 +8,7 @@
 #include <vector>
 #include "Request.h"
 
-class Knapback {
+class Knapsack {
 public:
     virtual int maximumBenefit(int capacity, std::vector <Request> *requests) = 0;
 };

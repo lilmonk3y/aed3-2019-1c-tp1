@@ -5,7 +5,7 @@
 #ifndef TP1_MOCHILA_BRUTEFORCE_H
 #define TP1_MOCHILA_BRUTEFORCE_H
 
-#include "../DesitionTreeStrategy.h"
+#include "DesitionTreeStrategy.h"
 
 class BruteForce : public DesitionTreeStrategy{
 public:

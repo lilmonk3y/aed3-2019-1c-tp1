@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
-#include "../scr/Knapback.h"
+#include "../scr/Knapsack.h"
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
-#include "../scr/KnapbackDesitionTree.h"
+#include "../scr/brute_force/KnapsackDesitionTree.h"
 #include "../scr/brute_force/BruteForce.h"
 
 struct MeetTest : testing::Test{
@@ -136,7 +136,7 @@ TEST_F(MeetTest, setToVectorTest){
 }
 
 TEST_F(MeetTest, whenMakingSolutionsWithBruteForce_mustReturnAllTheTreeLeafs){
-    KnapbackDesitionTree *bruteForce = new KnapbackDesitionTree(new BruteForce());
+    KnapsackDesitionTree *bruteForce = new KnapsackDesitionTree(new BruteForce());
 
     std::vector<Request> requests;
     requests.push_back(Request(2,3));

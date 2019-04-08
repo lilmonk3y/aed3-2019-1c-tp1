@@ -6,7 +6,7 @@
 #define TP1_MOCHILA_DESITIONTREESTRATEGY_H
 
 #include <vector>
-#include "Request.h"
+#include "../Request.h"
 
 class DesitionTreeStrategy {
 public:

@@ -4,12 +4,12 @@
 
 #include "MeetInTheMiddle.h"
 #include "../brute_force/BruteForce.h"
-#include "../KnapbackDesitionTree.h"
-#include "Solution.h"
+#include "../brute_force/KnapsackDesitionTree.h"
+#include "../Solution.h"
 #include <algorithm>
 
 int MeetInTheMiddle::maximumBenefit(int capacity, std::vector <Request> *requests) {
-    KnapbackDesitionTree *bruteForce = new KnapbackDesitionTree(new BruteForce());
+    KnapsackDesitionTree *bruteForce = new KnapsackDesitionTree(new BruteForce());
     std::vector<Request>::iterator last = requests->begin() + (requests->size()/2);
 
     std::vector<Request> firstHalf(requests->begin(),last);
@@ -46,12 +46,6 @@ int MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions, s
         }else{
             firstHalfIndex++;
         }
-
-//        if(firstHalfIndex == firstHalfSolutions->size()-1){
-//            secondHalfIndex--;
-//        }else if(secondHalfIndex == secondHalfSolutions->size()-1){
-//            firstHalfIndex++;
-//        }
     }
 
     return bestBenefit;

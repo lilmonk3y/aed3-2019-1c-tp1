@@ -7,16 +7,16 @@
 
 
 #include <set>
-#include "Request.h"
+#include "../Request.h"
 #include "DesitionTreeStrategy.h"
-#include "Knapback.h"
-#include "meet_in_the_middle/Solution.h"
+#include "../Knapsack.h"
+#include "../Solution.h"
 
-class KnapbackDesitionTree : public Knapback{
+class KnapsackDesitionTree : public Knapsack{
 public:
     int maximumBenefit(int capacity, std::vector <Request> *requests) override;
 
-    KnapbackDesitionTree(DesitionTreeStrategy *pBacktracking);
+    KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking);
 
     std::set<Solution> *getSolutions();
 
@@ -28,7 +28,7 @@ private:
     DesitionTreeStrategy *strategy;
     std::set<Solution> *solutions;
 
-    void solveKnapback(int requestsIndex);
+    void solveKnapsack(int requestsIndex);
 
     bool isValidActualSolution();
 

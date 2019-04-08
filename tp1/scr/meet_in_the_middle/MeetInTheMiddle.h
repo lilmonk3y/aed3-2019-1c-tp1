@@ -6,10 +6,10 @@
 #define TP1_MOCHILA_KNAPBACKMEETINTHEMIDDLE_H
 
 
-#include "../Knapback.h"
-#include "Solution.h"
+#include "../Knapsack.h"
+#include "../Solution.h"
 
-class MeetInTheMiddle : public Knapback{
+class MeetInTheMiddle : public Knapsack{
 public:
     int maximumBenefit(int capacity, std::vector <Request> *requests) override ;
 

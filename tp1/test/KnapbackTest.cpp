@@ -3,24 +3,24 @@
 //
 
 #include <gtest/gtest.h>
-#include "../scr/KnapbackDesitionTree.h"
+#include "../scr/brute_force/KnapsackDesitionTree.h"
 #include "../scr/Request.h"
 #include "../scr/brute_force/BruteForce.h"
 #include "../scr/backtracking/Backtracking.h"
-#include "../scr/Knapback.h"
+#include "../scr/Knapsack.h"
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
 
 struct KnapbackTest : testing::Test{
-    Knapback *knapback;
+    Knapsack *knapsack;
 
     KnapbackTest(){
-        //knapback = new KnapbackDesitionTree(new Backtracking());
-        //knapback = new KnapbackDesitionTree(new BruteForce());
-        knapback = new MeetInTheMiddle();
+        //knapsack = new KnapsackDesitionTree(new BruteForce());
+        //knapsack = new KnapsackDesitionTree(new Backtracking());
+        knapsack = new MeetInTheMiddle();
     }
 
     ~KnapbackTest(){
-        delete knapback;
+        delete knapsack;
     }
 };
 
@@ -31,7 +31,7 @@ TEST_F(KnapbackTest, whenHaveOnlyOneRequest_mustReturnItsBenefit){
     int benefit = 15;
     requests.push_back(Request(cost, benefit));
 
-    int actualBenefit = knapback->maximumBenefit(capacity,&requests);
+    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(benefit, actualBenefit);
 }
@@ -43,7 +43,7 @@ TEST_F(KnapbackTest, whenCostIsBiggerThanCapacity_mustNotSaveSolution){
     int benefit = 15;
     requests.push_back(Request(cost, benefit));
 
-    int actualBenefit = knapback->maximumBenefit(capacity,&requests);
+    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(0, actualBenefit);
 }
@@ -56,7 +56,7 @@ TEST_F(KnapbackTest, whenHaveMultipleRequest_mustGiveCorrectBenefit){
     requests.push_back(Request(3,13));
     requests.push_back(Request(7,20));
 
-    int actualBenefit = knapback->maximumBenefit(capacity,&requests);
+    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(33, actualBenefit);
 }
@@ -69,7 +69,7 @@ TEST_F(KnapbackTest, whenDoesNotExistSolution_mustReturnZero){
     requests.push_back(Request(3,13));
     requests.push_back(Request(7,20));
 
-    int actualBenefit = knapback->maximumBenefit(capacity,&requests);
+    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(0, actualBenefit);
 }
@@ -83,7 +83,7 @@ TEST_F(KnapbackTest, testingScenario_01){
     requests.push_back(Request(10,8));
     requests.push_back(Request(5,8));
 
-    int actualBenefit = knapback->maximumBenefit(capacity,&requests);
+    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(29, actualBenefit);
 }
