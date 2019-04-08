@@ -14,8 +14,8 @@ struct KnapbackTest : testing::Test{
     Knapback *knapback;
 
     KnapbackTest(){
-        knapback = new KnapbackDesitionTree(new Backtracking());
-        knapback = new KnapbackDesitionTree(new BruteForce());
+        //knapback = new KnapbackDesitionTree(new Backtracking());
+        //knapback = new KnapbackDesitionTree(new BruteForce());
         knapback = new MeetInTheMiddle();
     }
 

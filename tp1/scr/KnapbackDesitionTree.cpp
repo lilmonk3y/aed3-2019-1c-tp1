@@ -5,6 +5,7 @@
 #include <vector>
 #include "KnapbackDesitionTree.h"
 #include "Request.h"
+#include "meet_in_the_middle/Solution.h"
 
 #define SELECTED_BRANCH 1
 #define NO_SELECTED_BRANCH 0
@@ -18,6 +19,7 @@ int KnapbackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request
     this->capacity = capacity;
     this->partialMaximum = 0;
     this->electionTree = new std::vector<int>(requests->size());
+    this->solutions = new std::set<Solution>();
 
     this->solveKnapback(0);
     return this->partialMaximum;
@@ -25,6 +27,7 @@ int KnapbackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request
 
 void KnapbackDesitionTree::solveKnapback(int requestsIndex) {
     if(requestsIndex == this->requests->size()){
+        this->solutions->insert(Solution(this->sumatoryOfActualSolution(),this->sumSelectedRequestsBenefits()));
         if(this->isValidActualSolution() && isABetterSolution()){
             this->partialMaximum = this->sumSelectedRequestsBenefits();
         }
@@ -68,5 +71,9 @@ int KnapbackDesitionTree::sumSelectedRequestsBenefits() {
 
 bool KnapbackDesitionTree::strategyOptimization(int requestsIndex) {
     return this->strategy->strategyOptimization(requestsIndex, this->electionTree, this->requests, this->capacity, this->partialMaximum);
+}
+
+std::set<Solution>* KnapbackDesitionTree::getSolutions() {
+    return this->solutions;
 }
 

@@ -6,9 +6,11 @@
 #define TP1_MOCHILA_KNAPBACK_DESITION_TREE_H
 
 
+#include <set>
 #include "Request.h"
 #include "DesitionTreeStrategy.h"
 #include "Knapback.h"
+#include "meet_in_the_middle/Solution.h"
 
 class KnapbackDesitionTree : public Knapback{
 public:
@@ -16,12 +18,15 @@ public:
 
     KnapbackDesitionTree(DesitionTreeStrategy *pBacktracking);
 
+    std::set<Solution> *getSolutions();
+
 private:
     std::vector<Request> *requests;
     int capacity;
     int partialMaximum;
     std::vector<int> *electionTree;
     DesitionTreeStrategy *strategy;
+    std::set<Solution> *solutions;
 
     void solveKnapback(int requestsIndex);
 
@@ -34,6 +39,7 @@ private:
     bool isABetterSolution();
 
     bool strategyOptimization(int requestsIndex);
+
 };
 
 

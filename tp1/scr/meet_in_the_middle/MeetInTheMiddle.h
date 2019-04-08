@@ -7,11 +7,13 @@
 
 
 #include "../Knapback.h"
+#include "Solution.h"
 
 class MeetInTheMiddle : public Knapback{
 public:
-    int maximumBenefit(int capacity, std::vector <Request> *requests) ;
+    int maximumBenefit(int capacity, std::vector <Request> *requests) override ;
 
+    int mergeSolutions(std::vector<Solution> *firstHalfSolutions, std::vector<Solution> *secondHalfSolutions, int capacity);
 };
 
 
