@@ -16,6 +16,25 @@ public:
     }
 };
 
+inline bool requestCompare(Request first, Request second){
+    bool response;
+    if(first.cost == second.cost){
+        response = first.benefit < second.benefit;
+    }else{
+        response = first.cost < second.cost;
+    }
+    return response;
+}
+
+inline bool requestCompareReverse(Request first, Request second){
+    bool response;
+    if(first.cost == second.cost){
+        response = first.benefit > second.benefit;
+    }else{
+        response = first.cost > second.cost;
+    }
+    return response;
+}
 
 
 #endif //TP1_MOCHILA_REQUEST_H
