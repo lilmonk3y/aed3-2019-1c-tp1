@@ -17,12 +17,12 @@ struct KnapbackTest : testing::Test{
     KnapbackTest(){
         //knapsack = new KnapsackDesitionTree(new BruteForce());
         //knapsack = new KnapsackDesitionTree(new Backtracking());
-        knapsack = new MeetInTheMiddle();
-        //knapsack = new DynamicProgrammingAlgorithm();
+        //knapsack = new MeetInTheMiddle();
+        knapsack = new DynamicProgrammingAlgorithm();
     }
 
     ~KnapbackTest(){
-       // delete knapsack;
+       delete knapsack;
     }
 };
 

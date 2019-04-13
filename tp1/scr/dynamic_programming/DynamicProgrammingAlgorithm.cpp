@@ -3,7 +3,7 @@
 #include <algorithm>
 
 // inicializa con ceros
-std::vector<std::vector<int> > inicializarMatriz(int filas,int columnas) {	 // cuesta O(filas.columnas).
+std::vector<std::vector<int> > DynamicProgrammingAlgorithm::inicializarMatriz(int filas,int columnas) {	 // cuesta O(filas.columnas).
     std::vector<std::vector<int> > matrix;
     for(int i = 0; i<filas; i++) {
         std::vector<int> myvector; // inicializo una fila
@@ -15,11 +15,11 @@ std::vector<std::vector<int> > inicializarMatriz(int filas,int columnas) {	 // c
     return matrix;
 }
 
-int maximo(int a, int b) {
+int DynamicProgrammingAlgorithm::maximo(int a, int b) {
     return std::max(a,b);
 }
 
-int maximumBenefit(int capacity, std::vector<Request>* requests) {
+int DynamicProgrammingAlgorithm::maximumBenefit(int capacity, std::vector<Request>* requests) {
     if(requests->size()==0){
         return 0;
     }
