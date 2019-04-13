@@ -234,7 +234,7 @@ int main(){
     capacidad = pow(2,30);
     tamanoMaximoInstancia = 30;
     std::ofstream tiempos07;
-    tiempos07.open("experimento_6.csv",std::ios::out);
+    tiempos07.open("experimento_7.csv",std::ios::out);
     tiempos07 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int indiceCapacidad = 2; indiceCapacidad <= capacidad; indiceCapacidad = indiceCapacidad*2){
 
