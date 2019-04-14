@@ -17,11 +17,11 @@ public:
     }
 
     bool operator ==(const Solution& other) const{
-         return this->benefit == other.benefit & this->cost == other.cost;
+         return this->benefit == other.benefit && this->cost == other.cost;
     }
 
     bool operator <(const Solution& other) const{
-        return this->benefit < other.benefit & this->cost < other.cost;
+        return this->benefit < other.benefit && this->cost < other.cost;
     }
 };
 
