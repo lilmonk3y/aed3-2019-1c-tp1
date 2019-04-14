@@ -65,26 +65,25 @@ int main(){
     std::ofstream tiempos1;
     tiempos1.open("experimento_1.csv",std::ios::out);
 
-    tiempos1 << "instancias,n,v,fruerza_bruta,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
+    //tiempos1 << "instancias,n,v,fruerza_bruta,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio(cantidadElementos, capacidad);
 
-        tiempos1 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos1 << cantidadElementos << "," ;//<< cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(fuerzaBruta, limpiarDatos, capacidad, &originalSet);
-        tiempos1 << mediana << ",";
+        tiempos1 << std::fixed << mediana << ",";
 
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos1 << mediana << ",";
+        tiempos1 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
-        tiempos1 << mediana << ",";
+        tiempos1 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        std::cout << "mediana" << mediana << std::endl;
-        tiempos1 << mediana << std::endl;
+        tiempos1 <<  std::fixed <<  mediana << std::endl;
     }
     tiempos1.close();
 
@@ -104,20 +103,20 @@ int main(){
     std::ofstream tiempos2;
     tiempos2.open("experimento_2.csv",std::ios::out);
 
-    tiempos2 << "instancias,n,v,backtracking,programacion_dinamica" << std::endl;
+    //tiempos2 << "instancias,n,v,backtracking,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio(cantidadElementos, capacidad * 2);
         std::sort(originalSet.begin(),originalSet.end(),requestCompare);
 
-        tiempos2 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos2 << cantidadElementos << "," ;//<< "," << cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos2 << mediana << ",";
+        tiempos2 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos2 << mediana << std::endl;
+        tiempos2 << std::fixed <<  mediana << std::endl;
     }
     tiempos2.close();
 
@@ -137,20 +136,20 @@ int main(){
     std::ofstream tiempos3;
     tiempos3.open("experimento_3.csv",std::ios::out);
 
-    tiempos3 << "instancias,n,v,backtracking,programacion_dinamica" << std::endl;
+    //tiempos3 << "instancias,n,v,backtracking,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio(cantidadElementos, capacidad * 2);
         std::sort(originalSet.begin(),originalSet.end(),requestCompareReverse);
 
-        tiempos3 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos3 << cantidadElementos << ",";//<< "," << cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos3 << mediana << ",";
+        tiempos3 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos3 << mediana << std::endl;
+        tiempos3 << std::fixed <<  mediana << std::endl;
     }
     tiempos3.close();
 
@@ -171,22 +170,22 @@ int main(){
     std::ofstream tiempos4;
     tiempos4.open("experimento_4.csv",std::ios::out);
 
-    tiempos4 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
+    //tiempos4 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaExperimento4(cantidadElementos, capacidad);
 
-        tiempos4 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos4 << cantidadElementos << "," ;//<< cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos4 << mediana << ",";
+        tiempos4 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
-        tiempos4 << mediana << ",";
+        tiempos4 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos4 << mediana << std::endl;
+        tiempos4 << std::fixed <<  mediana << std::endl;
     }
     tiempos4.close();
 
@@ -207,22 +206,22 @@ int main(){
     std::ofstream tiempos5;
     tiempos5.open("experimento_5.csv",std::ios::out);
 
-    tiempos5 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
+    //tiempos5 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaExperimento5(cantidadElementos, capacidad);
 
-        tiempos5 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos5 << cantidadElementos << "," ;//<< cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos5 << mediana << ",";
+        tiempos5 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
-        tiempos5 << mediana << ",";
+        tiempos5 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos5 << mediana << std::endl;
+        tiempos5 << std::fixed <<  mediana << std::endl;
     }
     tiempos5.close();
 
@@ -244,19 +243,19 @@ int main(){
     tamanoMaximoInstancia = 20;
     std::ofstream tiempos06;
     tiempos06.open("experimento_6.csv",std::ios::out);
-    tiempos06 << "instancias,n,v,meet_in_the_middle,programacion_dinamica" << std::endl;
+    //tiempos06 << "instancias,n,v,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int cantidadElementos = 1; cantidadElementos <= tamanoMaximoInstancia; cantidadElementos++){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio(cantidadElementos, capacidad);
 
-        tiempos06 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
+        tiempos06 << cantidadElementos << "," ;//<< cantidadElementos << "," << capacidad << ",";
 
         double mediana;
         mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
-        tiempos06 << mediana << ",";
+        tiempos06 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos06 << mediana << std::endl;
+        tiempos06 << std::fixed <<  mediana << std::endl;
     }
     tiempos06.close();
 
@@ -277,23 +276,23 @@ int main(){
     tamanoMaximoInstancia = 30;
     std::ofstream tiempos07;
     tiempos07.open("experimento_7.csv",std::ios::out);
-    tiempos07 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
+    //tiempos07 << "instancias,n,v,backtracking,meet_in_the_middle,programacion_dinamica" << std::endl;
     for(int indiceCapacidad = 2; indiceCapacidad <= capacidad; indiceCapacidad = indiceCapacidad*2){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio( tamanoMaximoInstancia,indiceCapacidad);
 
-        tiempos07 << tamanoMaximoInstancia << "," << tamanoMaximoInstancia << "," << indiceCapacidad << ",";
+        tiempos07 << indiceCapacidad << ",";//tamanoMaximoInstancia << "," << tamanoMaximoInstancia << "," << indiceCapacidad << ",";
 
         double mediana;
 
         mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
-        tiempos07 << mediana << ",";
+        tiempos07 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
-        tiempos07 << mediana << ",";
+        tiempos07 << std::fixed <<  mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
-        tiempos07 << mediana << std::endl;
+        tiempos07 << std::fixed <<  mediana << std::endl;
     }
     tiempos07.close();
 
