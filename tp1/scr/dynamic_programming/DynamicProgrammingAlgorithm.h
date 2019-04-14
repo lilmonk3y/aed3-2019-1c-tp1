@@ -7,13 +7,13 @@ class DynamicProgrammingAlgorithm  : public Knapsack {
 
 public:
 
-    int maximumBenefit(int capacity, std::vector <Request> *requests) override ;
+    double maximumBenefit(double capacity, std::vector <Request> *requests) override ;
 
 //protected: // (is all public for testing)
 
-    std::vector<std::vector<int> > inicializarMatriz(int filas,int columnas);
-    int maximo(int a, int b);
-    bool ningunRequestPuedeEntrar(std::vector<Request>* requests,int maxCapacity );
+    std::vector<std::vector<double> > inicializarMatriz(int filas,int columnas);
+    double maximo(double a, double b);
+    bool ningunRequestPuedeEntrar(std::vector<Request>* requests,double maxCapacity );
 };
 
 #endif //TP1_MOCHILA_DYNAMICPROGRAMMINGALGORITHM_H

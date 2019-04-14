@@ -9,24 +9,24 @@
 #include "../scr/brute_force/KnapsackDesitionTree.h"
 #include "../scr/brute_force/BruteForce.h"
 
-int callSolution(std::vector<Request> *elements, int objectiveValue) {
+double callSolution(std::vector<Request> *elements, double objectiveValue) {
     Knapsack* knapsack = new KnapsackDesitionTree(new BruteForce());
-    int response = knapsack->maximumBenefit(objectiveValue,elements);
+    double response = knapsack->maximumBenefit(objectiveValue,elements);
     return response;
 }
 
 int main(){
 
     int sizeOfArray;
-    int objectiveValue;
+    double objectiveValue;
     std::cout << "Pass sets of values and finally 0 0 for expresing end of values." << std::endl;
     std::cin >> sizeOfArray;
     std::cin >> objectiveValue;
     while(sizeOfArray != 0 && objectiveValue != 0){
         std::vector<Request> elements;
         elements.clear();
-        int cost;
-        int benefit;
+        double cost;
+        double benefit;
         for(int index = 0; index < sizeOfArray; index ++){
             std::cin >> cost;
             std::cin >> benefit;

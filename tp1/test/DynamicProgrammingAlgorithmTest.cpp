@@ -15,9 +15,9 @@ struct DynamicProgrammingAlgorithmTest : testing::Test{
 
 TEST_F(DynamicProgrammingAlgorithmTest, maximoTest){
 
-    int a = 2;
-    int b = 1;
-    int result = dynamicProgrammingAlgorithm->maximo(a,b);
+    double a = 2;
+    double b = 1;
+    double result = dynamicProgrammingAlgorithm->maximo(a,b);
     ASSERT_EQ(2, result);
 
     a = 2;
@@ -32,7 +32,7 @@ TEST_F(DynamicProgrammingAlgorithmTest, maximoTest){
 }
 
 TEST_F(DynamicProgrammingAlgorithmTest, iniciarMatriz) {
-    std::vector<std::vector<int> > matrix = dynamicProgrammingAlgorithm->inicializarMatriz(10, 6);
+    std::vector<std::vector<double> > matrix = dynamicProgrammingAlgorithm->inicializarMatriz(10, 6);
     bool result = true;
 
     int cantFilas = matrix.size();
@@ -48,7 +48,7 @@ TEST_F(DynamicProgrammingAlgorithmTest, iniciarMatriz) {
 }
 
 TEST_F(DynamicProgrammingAlgorithmTest, iniciarMatrizFalseValorModificado) {
-    std::vector<std::vector<int> > matrix = dynamicProgrammingAlgorithm->inicializarMatriz(10, 6);
+    std::vector<std::vector<double> > matrix = dynamicProgrammingAlgorithm->inicializarMatriz(10, 6);
     matrix[5][4] = 1;
 
     bool result = true;
@@ -67,7 +67,7 @@ TEST_F(DynamicProgrammingAlgorithmTest, iniciarMatrizFalseValorModificado) {
 
 TEST_F(DynamicProgrammingAlgorithmTest, requestMayorACapacidad) {
 
-    int capacity = 3;
+    double capacity = 3;
     std::vector<Request> requests;
     requests.push_back(Request(6,12));
     requests.push_back(Request(4,15));
@@ -80,7 +80,7 @@ TEST_F(DynamicProgrammingAlgorithmTest, requestMayorACapacidad) {
 
 TEST_F(DynamicProgrammingAlgorithmTest, requestMenorACapacidad) {
 
-    int capacity = 8;
+    double capacity = 8;
     std::vector<Request> requests;
     requests.push_back(Request(6,12));
     requests.push_back(Request(4,15));

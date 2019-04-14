@@ -10,7 +10,7 @@
 class BruteForce : public DesitionTreeStrategy{
 public:
     bool strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
-                              double capacity, int actualMaximum) override;
+                              double capacity, double actualMaximum) override;
 };
 
 
