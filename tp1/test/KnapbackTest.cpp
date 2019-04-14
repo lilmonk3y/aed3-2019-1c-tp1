@@ -27,57 +27,57 @@ struct KnapbackTest : testing::Test{
 };
 
 TEST_F(KnapbackTest, whenHaveOnlyOneRequest_mustReturnItsBenefit){
-    int capacity = 10;
+    double capacity = 10;
     std::vector<Request> requests;
-    int cost = 5;
-    int benefit = 15;
+    double cost = 5;
+    double benefit = 15;
     requests.push_back(Request(cost, benefit));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(benefit, actualBenefit);
 }
 
 TEST_F(KnapbackTest, whenCostIsBiggerThanCapacity_mustNotSaveSolution){
-    int capacity = 10;
+    double capacity = 10;
     std::vector<Request> requests;
-    int cost = 50;
-    int benefit = 15;
+    double cost = 50;
+    double benefit = 15;
     requests.push_back(Request(cost, benefit));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, whenHaveMultipleRequest_mustGiveCorrectBenefit){
-    int capacity = 10;
+    double capacity = 10;
     std::vector<Request> requests;
     requests.push_back(Request(6,12));
     requests.push_back(Request(4,15));
     requests.push_back(Request(3,13));
     requests.push_back(Request(7,20));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(33, actualBenefit);
 }
 
 TEST_F(KnapbackTest, whenDoesNotExistSolution_mustReturnZero){
-    int capacity = 2;
+    double capacity = 2;
     std::vector<Request> requests;
     requests.push_back(Request(6,12));
     requests.push_back(Request(4,15));
     requests.push_back(Request(3,13));
     requests.push_back(Request(7,20));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testingScenario_01){
-    int capacity = 25;
+    double capacity = 25;
     std::vector<Request> requests;
     requests.push_back(Request(10,5));
     requests.push_back(Request(15,4));
@@ -85,22 +85,22 @@ TEST_F(KnapbackTest, testingScenario_01){
     requests.push_back(Request(10,8));
     requests.push_back(Request(5,8));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(29, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testWithoutRequest) {
-    int capacity = 25;
+    double capacity = 25;
     std::vector<Request> requests;
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testCapacityZero) {
-    int capacity = 0;
+    double capacity = 0;
     std::vector<Request> requests;
     requests.push_back(Request(10,5));
     requests.push_back(Request(15,4));
@@ -108,14 +108,14 @@ TEST_F(KnapbackTest, testCapacityZero) {
     requests.push_back(Request(10,8));
     requests.push_back(Request(5,8));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testBasicRequest) {
 
-    int capacity = 9;
+    double capacity = 9;
     std::vector<Request> requests;
 
     requests.push_back(Request(2,5));
@@ -123,14 +123,14 @@ TEST_F(KnapbackTest, testBasicRequest) {
     requests.push_back(Request(7,2));
     requests.push_back(Request(1,4));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(16, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_1) {
 
-    int capacity = 1;
+    double capacity = 1;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -139,14 +139,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_1) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_2) {
 
-    int capacity = 2;
+    double capacity = 2;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -155,14 +155,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_2) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(2, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_3) {
 
-    int capacity = 3;
+    double capacity = 3;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -171,14 +171,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_3) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(3, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_4) {
 
-    int capacity = 4;
+    double capacity = 4;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -187,14 +187,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_4) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(4, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_5) {
 
-    int capacity = 5;
+    double capacity = 5;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -203,14 +203,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_5) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(5, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_all_request_solution_15) {
 
-    int capacity = 15;
+    double capacity = 15;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -219,14 +219,14 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_all_request_solution_15) {
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(15, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testSameValuesBenefitAndCost_all_request_solution_anything_solution_is_equal_capacity) {
 
-    int capacity = 9;
+    double capacity = 9;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,1));
@@ -235,7 +235,7 @@ TEST_F(KnapbackTest, testSameValuesBenefitAndCost_all_request_solution_anything_
     requests.push_back(Request(4,4));
     requests.push_back(Request(5,5));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(capacity, actualBenefit);
 }
@@ -246,8 +246,8 @@ TEST_F(KnapbackTest, several_solutions) {
     requests.push_back(Request(5,5)); // same, middle values
     requests.push_back(Request(1,10)); // highest benefit and lower cost
 
-    int capacity = 0;
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double capacity = 0;
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(-1, actualBenefit);
 
     capacity = 1;
@@ -291,8 +291,8 @@ TEST_F(KnapbackTest, test_same_benefint) {
     requests.push_back(Request(2,3));
     requests.push_back(Request(3,3));
 
-    int capacity = 1;
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double capacity = 1;
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(3, actualBenefit);
 
     capacity = 2;
@@ -328,8 +328,8 @@ TEST_F(KnapbackTest, test_same_cost) {
     requests.push_back(Request(1,2));
     requests.push_back(Request(1,3));
 
-    int capacity = 1;
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double capacity = 1;
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(3, actualBenefit);
 
     capacity = 2;
@@ -355,8 +355,8 @@ TEST_F(KnapbackTest, test_all_combinations_were_solutions) {
     requests.push_back(Request(3,4));
     requests.push_back(Request(6,100));
 
-    int capacity = 0;
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double capacity = 0;
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(-1, actualBenefit);
 
     capacity = 1;
@@ -412,28 +412,28 @@ TEST_F(KnapbackTest, test_all_combinations_were_solutions) {
 
 TEST_F(KnapbackTest, test_middle_is_best_solution) {
 
-    int capacity = 4;
+    double capacity = 4;
     std::vector<Request> requests;
 
     requests.push_back(Request(4,100));
     requests.push_back(Request(1,100));
     requests.push_back(Request(5,3));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
     ASSERT_EQ(100, actualBenefit);
 }
 
 TEST_F(KnapbackTest, test_first_and_then_last_is_best_solution) {
 
-    int capacity = 4;
+    double capacity = 4;
     std::vector<Request> requests;
 
     requests.push_back(Request(1,100));
     requests.push_back(Request(4,99));
     requests.push_back(Request(1,98));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(198, actualBenefit);
 
     capacity = 2;
@@ -443,13 +443,13 @@ TEST_F(KnapbackTest, test_first_and_then_last_is_best_solution) {
 
 TEST_F(KnapbackTest, test_last_is_best_solution) {
 
-    int capacity = 3;
+    double capacity = 3;
     std::vector<Request> requests;
 
     requests.push_back(Request(3,100));
     requests.push_back(Request(4,99));
     requests.push_back(Request(1,200));
 
-    int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
+    double actualBenefit = knapsack->maximumBenefit(capacity,&requests);
     ASSERT_EQ(200, actualBenefit);
 }

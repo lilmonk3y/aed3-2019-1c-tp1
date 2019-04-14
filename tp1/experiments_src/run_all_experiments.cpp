@@ -11,11 +11,11 @@
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
 double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double capacity, std::vector<Request> *requests);
 
-std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int elementos, int capacidad);
+std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int elementos, double capacidad);
 
-std::vector<Request> crearInstanciaExperimento4(int elementos, int capacidad);
+std::vector<Request> crearInstanciaExperimento4(int elementos, double capacidad);
 
-std::vector<Request> crearInstanciaExperimento5(int elementos, int capacidad);
+std::vector<Request> crearInstanciaExperimento5(int elementos, double capacidad);
 
 int main(){
 
@@ -263,22 +263,22 @@ int main(){
 
 
 
-std::vector<Request> crearInstanciaExperimento5(int cantidadDeElementos, int capacidad) {
+std::vector<Request> crearInstanciaExperimento5(int cantidadDeElementos, double capacidad) {
     std::vector<Request> instancia;
     instancia.reserve(cantidadDeElementos);
     for(int index = 0; index < cantidadDeElementos; index++){
-        instancia.push_back(Request(std::rand() % (capacidad*2) + capacidad+1,std::rand()));
+        instancia.push_back(Request(   std::fmod( (float) std::rand() , (capacidad*2) ) + capacidad+1, (float) std::rand()));
     }
     instancia.at(0) = Request(1, INT_MAX);
     assert(instancia.size() == cantidadDeElementos);
     return instancia;
 }
 
-std::vector<Request> crearInstanciaExperimento4(int cantidadDeElementos, int capacidad) {
+std::vector<Request> crearInstanciaExperimento4(int cantidadDeElementos, double capacidad) {
     std::vector<Request> instancia;
     instancia.reserve(cantidadDeElementos);
     for(int index = 0; index < cantidadDeElementos; index++){
-        instancia.push_back(Request(std::rand() % (capacidad*2) + capacidad+1, std::rand()));
+        instancia.push_back(Request(  std::fmod( (float) std::rand() , (capacidad*2) ) + capacidad+1, (float) std::rand()));
     }
     instancia.at(cantidadDeElementos-1) = Request(0,INT_MAX);
     assert(instancia.size() == cantidadDeElementos);
@@ -288,11 +288,11 @@ std::vector<Request> crearInstanciaExperimento4(int cantidadDeElementos, int cap
 /*
  * Instancia con costo entre 0 y la capacidad, y beneficio aleatorio.
  */
-std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int cantidadDeElementos, int capacidad){
+std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int cantidadDeElementos, double capacidad){
     std::vector<Request> instancia;
     instancia.reserve(cantidadDeElementos);
     for(int index = 0; index < cantidadDeElementos; index++){
-        instancia.push_back(Request(std::rand() % capacidad,std::rand()));
+        instancia.push_back(   Request(  std::fmod( (float) std::rand() , capacidad )    , (float) std::rand()  )  );
     }
     assert(instancia.size() == cantidadDeElementos);
     return instancia;
