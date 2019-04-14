@@ -10,6 +10,9 @@
 #include "../scr/backtracking/Backtracking.h"
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
 #include "../scr/dynamic_programming/DynamicProgrammingAlgorithm.h"
+#include <chrono>
+#include <thread>
+#include<time.h>
 
 double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double capacity, std::vector<Request> *requests);
 
@@ -18,6 +21,10 @@ std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int elementos, in
 std::vector<Request> crearInstanciaExperimento4(int elementos, int capacidad);
 
 std::vector<Request> crearInstanciaExperimento5(int elementos, int capacidad);
+
+int randomEnRangoInt(int minimo, int maximo);
+double randomEnRangoDouble(double minimo, double maximo);
+std::vector<Request> requestsRandom(double maxPesoItem, double maxBeneficioItem, int maxCantidadElementos);
 
 int main(){
 
@@ -34,7 +41,7 @@ int main(){
     Knapsack *meetInTheMiddle = new MeetInTheMiddle();
     Knapsack *programacionDinamica = new DynamicProgrammingAlgorithm();
 
-    int limpiarDatos = 1;// 100
+    int limpiarDatos = 100;
     int tamanoMaximoInstancia;
     double capacidad;
 
@@ -50,8 +57,8 @@ int main(){
 
     std::cout << " ---- INICIO EXPERIMENTO 1 ----" << std::endl;
 
-    capacidad = 10;//50
-    tamanoMaximoInstancia = 5;//30
+    capacidad = 50;
+    tamanoMaximoInstancia = 30;
 
     std::ofstream tiempos1;
     tiempos1.open("experimento_1.csv",std::ios::out);
@@ -64,13 +71,13 @@ int main(){
         tiempos1 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
 
         double mediana;
-        //mediana = calcularTiempos(fuerzaBruta, limpiarDatos, capacidad, &originalSet);
+        mediana = calcularTiempos(fuerzaBruta, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
-        //mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
+        mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
-        //mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
+        mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
@@ -80,7 +87,7 @@ int main(){
     tiempos1.close();
 
     std::cout << " ---- FIN EXPERIMENTO 1 ----" << std::endl;
-return 0;
+
     ////////////////////////////////// EXPERIMENTO 2 /////////////////////////////////////////
 /*
      * Experimento 2
@@ -290,6 +297,80 @@ return 0;
 
     std::cout << " ---- FIN EXPERIMENTO 7 ----" << std::endl;
 
+    ////////////////////////////////// EXPERIMENTO 8 /////////////////////////////////////////
+
+    /*
+     * el siguiente experimento consta en generar mochilas randoms (los requests siempre tienen peso >0)
+     * sus valores son randoms al igual que la cantidad de requests
+     * la capacidad maxima tambien es aleatoria
+     * con esas dos variables anteriores (capacidad maxima y requests)
+     * ejecutamos los 4 algoritmos, mismos parametros por experimento, se realizarán 100 experimentos
+     * (la cantidad de experimentos es configurable)
+     * */
+    std::cout << " ---- COMIENZO EXPERIMENTO 8 ----" << std::endl;
+
+    srand(time(NULL)); // semilla random
+
+    double maxCapacidad = 20; // tamaño mochila  entre 1 y 30
+
+    double maxPesoItem = 10; // entre 1 y 33
+    double maxBeneficioItem = 30; // entre 0 y 100 - beneficio items
+
+    // fuerza bruta prueba todos los casos, asi que no tiene que ser mayor a 30, (2^30)
+    int maxCantidadRequest = 24;// entre 0 y 30 (asi puede estar el caso de entrar todos)
+
+    int cantidadExperimentos = 100;// mismas situaciones para cada algoritmo en cada experimento
+
+    std::ofstream fileExperimento8;
+    fileExperimento8.open("experimento_8.csv",std::ios::out);
+    for(int numeroExperimento=1; numeroExperimento < cantidadExperimentos+1; numeroExperimento ++) {
+        std::cout << "experimento numero:" << numeroExperimento << "\n";
+        std::chrono::duration<double> tiempoFuerzaBruta;
+        std::chrono::duration<double> tiempoBacktracking;
+        std::chrono::duration<double> tiempoMeetInTheMiddle;
+        std::chrono::duration<double> tiempoDinamica;
+
+        std::vector<Request> requests = requestsRandom(maxPesoItem,maxBeneficioItem,maxCantidadRequest);
+        double capacidadMochilaActualExperimento = randomEnRangoDouble(1,maxCapacidad);
+        std::cout << requests.size() << std::endl;
+        std::cout << capacidadMochilaActualExperimento << std::endl;
+
+        Knapsack* fuerzaBruta_algoritmo = new KnapsackDesitionTree(new BruteForce());
+        Knapsack* backtracking_algoritmo = new KnapsackDesitionTree(new Backtracking());
+        Knapsack* meetInTheMiddle_algoritmo = new MeetInTheMiddle();
+        Knapsack* programacionDinamica_algoritmo = new DynamicProgrammingAlgorithm();
+
+        std::chrono::steady_clock::time_point tmp_fuerza_bruta_start = std::chrono::steady_clock::now();
+        double benefitFB = fuerzaBruta_algoritmo->maximumBenefit(capacidadMochilaActualExperimento , &requests);
+        std::chrono::steady_clock::time_point tmp_fuerza_bruta_end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> tmp_fuerza_bruta = std::chrono::duration_cast<std::chrono::duration<double > >(tmp_fuerza_bruta_end - tmp_fuerza_bruta_start); // diferencia tiempos
+        delete fuerzaBruta_algoritmo;
+
+        std::chrono::steady_clock::time_point tmp_backtracking_start = std::chrono::steady_clock::now();
+        double benefitBT = backtracking_algoritmo->maximumBenefit(capacidadMochilaActualExperimento , &requests);
+        std::chrono::steady_clock::time_point tmp_backtracking_end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> tmp_backtracking = std::chrono::duration_cast<std::chrono::duration<double > >(tmp_backtracking_end - tmp_backtracking_start); // diferencia tiempos
+        delete backtracking_algoritmo;
+
+        std::chrono::steady_clock::time_point tmp_meet_middle_start = std::chrono::steady_clock::now();
+        double benefitMM = meetInTheMiddle_algoritmo->maximumBenefit(capacidadMochilaActualExperimento , &requests);
+        std::chrono::steady_clock::time_point tmp_meet_middle_end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> tmp_meet_middle = std::chrono::duration_cast<std::chrono::duration<double > >(tmp_meet_middle_end - tmp_meet_middle_start); // diferencia tiempos
+        delete meetInTheMiddle_algoritmo;
+
+        std::chrono::steady_clock::time_point tmp_dinamica_start = std::chrono::steady_clock::now();
+        double benefitPD = programacionDinamica_algoritmo->maximumBenefit(capacidadMochilaActualExperimento , &requests);
+        std::chrono::steady_clock::time_point tmp_dinamica_end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> tmp_dinamica = std::chrono::duration_cast<std::chrono::duration<double > >(tmp_dinamica_end - tmp_dinamica_start); // diferencia tiempos
+        delete programacionDinamica_algoritmo;
+
+        bool sonIguales = (benefitFB == benefitPD) && (benefitBT == benefitMM);
+        fileExperimento8 << std::fixed << numeroExperimento << "," << tmp_fuerza_bruta.count()  << "," << tmp_backtracking.count() << "," << tmp_meet_middle.count() << "," << tmp_dinamica.count() << "\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    fileExperimento8.close();
+    std::cout << " ---- FIN EXPERIMENTO 8 ----" << std::endl;
+
     ////////////////////////////////// EXPERIMENTO N /////////////////////////////////////////
 
     return 0;
@@ -345,7 +426,7 @@ double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double cap
     for(int nroDeIteracion = 0; nroDeIteracion < cantidadDeIteraciones; nroDeIteracion++){
 
             auto tiempo_inicio = std::__1::chrono::steady_clock::now();
-            std::cout << knapsack->maximumBenefit(capacity,requests) << std::endl;
+            knapsack->maximumBenefit(capacity,requests);
             auto tiempo_final = std::__1::chrono::steady_clock::now();
             auto diferencia = tiempo_final - tiempo_inicio;
             tiemposALimpiar.at(nroDeIteracion) = std::__1::chrono::duration <double, std::__1::milli> (diferencia).count();
@@ -353,4 +434,32 @@ double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double cap
         }
     sort(tiemposALimpiar.begin(),tiemposALimpiar.end());
     return tiemposALimpiar.at(std::floor(tiemposALimpiar.size() / 2));
+}
+
+// devolver un random entero entre dos numeros.
+int randomEnRangoInt(int minimo, int maximo) {
+    int random = std::rand() % (maximo+1);
+    if(random < minimo ) {
+        random = minimo;
+    }
+    return random;
+}
+
+// devolver un random double entre dos numeros.
+double randomEnRangoDouble(double minimo, double maximo) {
+    double random =  std::fmod( (float) std::rand() , (maximo+1));
+    if(random < minimo ) {
+        random = minimo;
+    }
+    return random;
+}
+
+std::vector<Request> requestsRandom(double maxPesoItem, double maxBeneficioItem, int maxCantidadElementos) {
+    std::vector<Request> requests;
+    int cantidad = randomEnRangoInt(0, maxCantidadElementos);
+    for(int j=0; j<cantidad; j++){
+        Request request = Request( randomEnRangoDouble(1,maxPesoItem),  randomEnRangoDouble(0,maxBeneficioItem)  ) ;
+        requests.push_back(request);
+    }
+    return requests;
 }
