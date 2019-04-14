@@ -14,7 +14,7 @@
 
 class KnapsackDesitionTree : public Knapsack{
 public:
-    int maximumBenefit(int capacity, std::vector <Request> *requests) override;
+    double maximumBenefit(double capacity, std::vector<Request> *requests) override;
 
     KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking);
 
@@ -22,8 +22,8 @@ public:
 
 private:
     std::vector<Request> *requests;
-    int capacity;
-    int partialMaximum;
+    double capacity;
+    double partialMaximum;
     std::vector<int> *electionTree;
     DesitionTreeStrategy *strategy;
     std::set<Solution> *solutions;
@@ -32,9 +32,9 @@ private:
 
     bool isValidActualSolution();
 
-    int sumatoryOfActualSolution();
+    double sumatoryOfActualSolution();
 
-    int sumSelectedRequestsBenefits();
+    double sumSelectedRequestsBenefits();
 
     bool isABetterSolution();
 

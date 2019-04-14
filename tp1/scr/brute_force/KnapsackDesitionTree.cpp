@@ -14,7 +14,7 @@ KnapsackDesitionTree::KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking) 
     this->strategy = pBacktracking;
 }
 
-int KnapsackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request> *requests) {
+double KnapsackDesitionTree::maximumBenefit(double capacity, std::__1::vector<Request> *requests) {
     this->requests = requests;
     this->capacity = capacity;
     this->partialMaximum = -1;
@@ -51,8 +51,8 @@ bool KnapsackDesitionTree::isValidActualSolution() {
     return this->sumatoryOfActualSolution() <= this->capacity;
 }
 
-int KnapsackDesitionTree::sumatoryOfActualSolution() {
-    int summatory = 0;
+double KnapsackDesitionTree::sumatoryOfActualSolution() {
+    double summatory = 0;
     for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
         if(this->electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += this->requests->at(iterator).cost;
@@ -61,8 +61,8 @@ int KnapsackDesitionTree::sumatoryOfActualSolution() {
     return summatory;
 }
 
-int KnapsackDesitionTree::sumSelectedRequestsBenefits() {
-    int summatory = 0;
+double KnapsackDesitionTree::sumSelectedRequestsBenefits() {
+    double summatory = 0;
     for(int iterator = 0; iterator < this->electionTree->size(); iterator++){
         if(this->electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += this->requests->at(iterator).benefit;

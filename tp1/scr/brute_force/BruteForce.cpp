@@ -5,6 +5,6 @@
 #include "BruteForce.h"
 
 bool BruteForce::strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
-                                      int capacity, int actualMaximum) {
+                                      double capacity, double actualMaximum) {
     return true;
 }

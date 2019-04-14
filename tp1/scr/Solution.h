@@ -8,10 +8,10 @@
 
 class Solution {
 public:
-    int cost;
-    int benefit;
+    double cost;
+    double benefit;
 
-    Solution(int cost, int benefit) {
+    Solution(double cost, double benefit) {
         this->cost = cost;
         this->benefit = benefit;
     }

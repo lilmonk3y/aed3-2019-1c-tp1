@@ -8,9 +8,9 @@
 
 class Request {
 public:
-    int cost;
-    int benefit;
-    Request(int cost, int benfit){
+    double cost;
+    double benefit;
+    Request(double cost, double benfit){
         this->cost = cost;
         this->benefit = benfit;
     }

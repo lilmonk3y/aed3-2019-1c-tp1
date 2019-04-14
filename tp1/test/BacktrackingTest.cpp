@@ -26,7 +26,7 @@ struct BacktrackingTest : testing::Test{
 };
 
 TEST_F(BacktrackingTest, whenABackpackIsValidToContinue_mustReturnTrue){
-    int capacity = 15;
+    double capacity = 15;
     std::vector<int> electionTree{SELECTED_BRANCH,SELECTED_BRANCH};
     int requestsIndex = 2;
 
@@ -36,7 +36,7 @@ TEST_F(BacktrackingTest, whenABackpackIsValidToContinue_mustReturnTrue){
 }
 
 TEST_F(BacktrackingTest, whenABackpackHasAHigherCostThanItsCapacity_mustReturnFalse){
-    int capacity = 9;
+    double capacity = 9;
     std::vector<int> electionTree{SELECTED_BRANCH,SELECTED_BRANCH};
     int requestsIndex = 2;
 
@@ -48,7 +48,7 @@ TEST_F(BacktrackingTest, whenABackpackHasAHigherCostThanItsCapacity_mustReturnFa
 TEST_F(BacktrackingTest, whenAKnapbackMayImproveAPartialMaximum_mustReturnTrue){
     std::vector<int> electionTree{NO_SELECTED_BRANCH,SELECTED_BRANCH};
     int requestsIndex = 2;
-    int actualMaximum = 12 + 13 + 20;
+    double actualMaximum = 12 + 13 + 20;
 
     bool actualResponce = backtracking->strategyOptimization(requestsIndex, &electionTree, &requests1, 100, actualMaximum);
 
@@ -58,7 +58,7 @@ TEST_F(BacktrackingTest, whenAKnapbackMayImproveAPartialMaximum_mustReturnTrue){
 TEST_F(BacktrackingTest, whenAKnapbackCantImproveAPartialMaximum_mustReturnFalse){
     std::vector<int> electionTree{SELECTED_BRANCH,NO_SELECTED_BRANCH};
     int requestsIndex = 2;
-    int actualMaximum = 15 + 13 + 20;
+    double actualMaximum = 15 + 13 + 20;
 
     bool actualResponce = backtracking->strategyOptimization(requestsIndex, &electionTree, &requests1, 100, actualMaximum);
 

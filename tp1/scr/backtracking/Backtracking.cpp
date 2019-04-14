@@ -9,24 +9,24 @@
 
 bool
 Backtracking::strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
-                                   int capacity, int actualMaximum) {
+                                   double capacity, double actualMaximum) {
     return factabilityCut(requestsIndex, electionTree, requests, capacity) &&
             optimalityCut(requestsIndex, electionTree, requests, actualMaximum);
 }
 
 bool Backtracking::optimalityCut(int requestsIndex, std::vector<int> *electionTree,
-                                 std::vector<Request> *requests, int actualMaximum) {
+                                 std::vector<Request> *requests, double actualMaximum) {
     return sumSelectedRequestsBenefits(requestsIndex, electionTree, requests) +
            sumNextRequestsBenefits(requestsIndex, requests) >= actualMaximum;
 }
 
 bool Backtracking::factabilityCut(int requestsIndex, std::vector<int> *electionTree,
-                                  std::vector<Request> *requests, int capacity) {
+                                  std::vector<Request> *requests, double capacity) {
     return sumSelectedRequestsCosts(requestsIndex, electionTree, requests) <= capacity;
 }
 
-int Backtracking::sumSelectedRequestsCosts(int index, std::vector<int> *electionTree, std::vector <Request> *requests) {
-    int summatory = 0;
+double Backtracking::sumSelectedRequestsCosts(int index, std::vector<int> *electionTree, std::vector <Request> *requests) {
+    double summatory = 0;
     for(int iterator = 0; iterator < index; iterator++){
         if(electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += requests->at(iterator).cost;
@@ -35,9 +35,9 @@ int Backtracking::sumSelectedRequestsCosts(int index, std::vector<int> *election
     return summatory;
 }
 
-int Backtracking::sumSelectedRequestsBenefits(int requestsIndex, std::vector<int> *electionTree,
+double Backtracking::sumSelectedRequestsBenefits(int requestsIndex, std::vector<int> *electionTree,
                                               std::vector<Request> *requests) {
-    int summatory = 0;
+    double summatory = 0;
     for(int iterator = 0; iterator < requestsIndex; iterator++){
         if(electionTree->at(iterator) == SELECTED_BRANCH){
             summatory += requests->at(iterator).benefit;
@@ -46,8 +46,8 @@ int Backtracking::sumSelectedRequestsBenefits(int requestsIndex, std::vector<int
     return summatory;
 }
 
-int Backtracking::sumNextRequestsBenefits(int requestsIndex, std::vector<Request> *requests) {
-    int summatory = 0;
+double Backtracking::sumNextRequestsBenefits(int requestsIndex, std::vector<Request> *requests) {
+    double summatory = 0;
     for(int iterator = requestsIndex; iterator < requests->size(); iterator++){
         summatory += requests->at(iterator).benefit;
     }

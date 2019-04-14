@@ -10,7 +10,7 @@
 
 class Knapsack {
 public:
-    virtual int maximumBenefit(int capacity, std::vector <Request> *requests) = 0;
+    virtual double maximumBenefit(double capacity, std::vector<Request> *requests) = 0;
 };
 
 

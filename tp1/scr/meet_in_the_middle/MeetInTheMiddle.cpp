@@ -8,7 +8,7 @@
 #include "../Solution.h"
 #include <algorithm>
 
-int MeetInTheMiddle::maximumBenefit(int capacity, std::vector <Request> *requests) {
+double MeetInTheMiddle::maximumBenefit(double capacity, std::vector<Request> *requests) {
     KnapsackDesitionTree *bruteForce = new KnapsackDesitionTree(new BruteForce());
     std::vector<Request>::iterator last = requests->begin() + (requests->size()/2);
 
@@ -26,15 +26,16 @@ int MeetInTheMiddle::maximumBenefit(int capacity, std::vector <Request> *request
     return mergeSolutions(&firstHalfSolutions,&secondHalfSolutions, capacity);
 }
 
-int MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions, std::vector<Solution> *secondHalfSolutions,
-                                int capacity) {
+double MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions,
+                                    std::vector<Solution> *secondHalfSolutions,
+                                    double capacity) {
     std::sort(firstHalfSolutions->begin(),firstHalfSolutions->end(), solutionCompare);
     std::sort(secondHalfSolutions->begin(),secondHalfSolutions->end(), solutionCompare);
 
     bool search = true;
-    unsigned long firstHalfIndex = 0;
-    unsigned long secondHalfIndex = secondHalfSolutions->size()-1;
-    int bestBenefit = -1;
+    double firstHalfIndex = 0;
+    double secondHalfIndex = secondHalfSolutions->size()-1;
+    double bestBenefit = -1;
     while(search){
         if(firstHalfIndex == firstHalfSolutions->size() || secondHalfIndex == -1){
             search = false;

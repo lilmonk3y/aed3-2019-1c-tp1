@@ -97,9 +97,9 @@ TEST_F(MeetTest, mergeTest1){
     second.push_back(Solution(5,6));
     second.push_back(Solution(1,7));
 
-    int capacity = 2;
+    double capacity = 2;
 
-    int actualBenefit = meet->mergeSolutions(&first, &second, capacity);
+    double actualBenefit = meet->mergeSolutions(&first, &second, capacity);
 
     ASSERT_EQ(14, actualBenefit);
 }
@@ -115,9 +115,9 @@ TEST_F(MeetTest, mergeTest2){
     second.push_back(Solution(5,6));
     second.push_back(Solution(1,7));
 
-    int capacity = 30;
+    double capacity = 30;
 
-    int actualBenefit = meet->mergeSolutions(&first, &second, capacity);
+    double actualBenefit = meet->mergeSolutions(&first, &second, capacity);
 
     ASSERT_EQ(20, actualBenefit);
 }
