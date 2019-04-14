@@ -47,6 +47,6 @@ int MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions, s
             firstHalfIndex++;
         }
     }
-
-    return bestBenefit;
+    bestBenefit = bestBenefit <= 0 ? -1 : bestBenefit;
+    return bestBenefit ;
 }
