@@ -9,6 +9,8 @@
 #include "../scr/brute_force/BruteForce.h"
 #include "../scr/backtracking/Backtracking.h"
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
+#include "../scr/dynamic_programming/DynamicProgrammingAlgorithm.h"
+
 double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double capacity, std::vector<Request> *requests);
 
 std::vector<Request> crearInstanciaConCostoYBeneficioAleatorio(int elementos, int capacidad);
@@ -30,10 +32,9 @@ int main(){
     Knapsack *fuerzaBruta = new KnapsackDesitionTree(new BruteForce());
     Knapsack *backtracking = new KnapsackDesitionTree(new Backtracking());
     Knapsack *meetInTheMiddle = new MeetInTheMiddle();
-    //Cuando lo tengamos listo lo instanciamos con PD
-    Knapsack *programacionDinamica = new MeetInTheMiddle();
+    Knapsack *programacionDinamica = new DynamicProgrammingAlgorithm();
 
-    int limpiarDatos = 100;
+    int limpiarDatos = 1;// 100
     int tamanoMaximoInstancia;
     double capacidad;
 
@@ -46,8 +47,12 @@ int main(){
      * La idea es ver el comportamiento de los mismos en igualdad de condiciones sin perjudicar a ninguno en especial.
      * Para ello las instancias se hacen con números aleatorios
 */
-    capacidad = 50;
-    tamanoMaximoInstancia = 30;
+
+    std::cout << " ---- INICIO EXPERIMENTO 1 ----" << std::endl;
+
+    capacidad = 10;//50
+    tamanoMaximoInstancia = 5;//30
+
     std::ofstream tiempos1;
     tiempos1.open("experimento_1.csv",std::ios::out);
 
@@ -59,26 +64,32 @@ int main(){
         tiempos1 << cantidadElementos << "," << cantidadElementos << "," << capacidad << ",";
 
         double mediana;
-        mediana = calcularTiempos(fuerzaBruta, limpiarDatos, capacidad, &originalSet);
+        //mediana = calcularTiempos(fuerzaBruta, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
-        mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
+        //mediana = calcularTiempos(backtracking, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
-        mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
+        //mediana = calcularTiempos(meetInTheMiddle, limpiarDatos, capacidad, &originalSet);
         tiempos1 << mediana << ",";
 
         mediana = calcularTiempos(programacionDinamica, limpiarDatos, capacidad, &originalSet);
+        std::cout << "mediana" << mediana << std::endl;
         tiempos1 << mediana << std::endl;
     }
     tiempos1.close();
 
+    std::cout << " ---- FIN EXPERIMENTO 1 ----" << std::endl;
+return 0;
     ////////////////////////////////// EXPERIMENTO 2 /////////////////////////////////////////
 /*
      * Experimento 2
      * Compiten BT y PD
      * V fijo y N ordenado de menor a mayor. Esto va a ayudar a BT ya que este va a cortar muchas más ramas por sus podas
 */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 2 ----" << std::endl;
+
     capacidad = 100;
     tamanoMaximoInstancia = 40;
     std::ofstream tiempos2;
@@ -101,6 +112,7 @@ int main(){
     }
     tiempos2.close();
 
+    std::cout << " ---- FIN EXPERIMENTO 2 ----" << std::endl;
 
     ////////////////////////////////// EXPERIMENTO 3 /////////////////////////////////////////
     /*
@@ -108,6 +120,9 @@ int main(){
      * Compiten BT y PD
      * V fijo y N ordenado de mayor a menor. Esto va a perjudicar a BT porque va a podar mucho menos.
     */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 3 ----" << std::endl;
+
     capacidad = 100;
     tamanoMaximoInstancia = 50;
     std::ofstream tiempos3;
@@ -130,6 +145,7 @@ int main(){
     }
     tiempos3.close();
 
+    std::cout << " ---- FIN EXPERIMENTO 3 ----" << std::endl;
 
     ////////////////////////////////// EXPERIMENTO 4 /////////////////////////////////////////
     /*
@@ -138,6 +154,9 @@ int main(){
      * V fijo y N con los elementos entre [0,n-1) mayores que V y el elemento n-1 tiene costo 0.
      * Por esto se perjudica a BT porque tiene que ver el arbol de completo.
      */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 4 ----" << std::endl;
+
     capacidad = 100;
     tamanoMaximoInstancia = 50;
     std::ofstream tiempos4;
@@ -162,6 +181,8 @@ int main(){
     }
     tiempos4.close();
 
+    std::cout << " ---- FIN EXPERIMENTO 4 ----" << std::endl;
+
     ////////////////////////////////// EXPERIMENTO 5 /////////////////////////////////////////
     /*
      * Experimento 5
@@ -169,6 +190,9 @@ int main(){
      * V fijo y N con los elementos entre [1,n) mayores que V y el elemento 0 tiene a V.
      * Por esto se beneficia a BT porque va a podar mucho. MITM va a tener un arbol que poda y el otro no poda nada.
      */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 5 ----" << std::endl;
+
     capacidad = 100;
     tamanoMaximoInstancia = 50;
     std::ofstream tiempos5;
@@ -193,6 +217,8 @@ int main(){
     }
     tiempos5.close();
 
+    std::cout << " ---- FIN EXPERIMENTO 5 ----" << std::endl;
+
     ////////////////////////////////// EXPERIMENTO 6 /////////////////////////////////////////
 /*
      * Experimento 6
@@ -200,6 +226,9 @@ int main(){
      * La idea es perjudicar a PD teniendo un V muy grande.
      * OBS: Intenté con INT_MAX/2 pero no termina.
 */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 6 ----" << std::endl;
+
     // capacidad = INT_MAX/2;
     //capacidad = 500*500;
     capacidad = 100*100;
@@ -222,6 +251,8 @@ int main(){
     }
     tiempos06.close();
 
+    std::cout << " ---- COMIENZO EXPERIMENTO 6 ----" << std::endl;
+
     ////////////////////////////////// EXPERIMENTO 7 /////////////////////////////////////////
 /*
      * Experimento 7
@@ -230,6 +261,8 @@ int main(){
      * La idea es perjudicar a PD teniendo un V muy grande.
      * OBS: Intenté con INT_MAX/2 pero no termina.
 */
+
+    std::cout << " ---- COMIENZO EXPERIMENTO 7 ----" << std::endl;
 
     capacidad = pow(2,30);
     tamanoMaximoInstancia = 30;
@@ -254,6 +287,10 @@ int main(){
         tiempos07 << mediana << std::endl;
     }
     tiempos07.close();
+
+    std::cout << " ---- FIN EXPERIMENTO 7 ----" << std::endl;
+
+    ////////////////////////////////// EXPERIMENTO N /////////////////////////////////////////
 
     return 0;
 }
@@ -308,7 +345,7 @@ double calcularTiempos(Knapsack *knapsack, int cantidadDeIteraciones, double cap
     for(int nroDeIteracion = 0; nroDeIteracion < cantidadDeIteraciones; nroDeIteracion++){
 
             auto tiempo_inicio = std::__1::chrono::steady_clock::now();
-            knapsack->maximumBenefit(capacity,requests);
+            std::cout << knapsack->maximumBenefit(capacity,requests) << std::endl;
             auto tiempo_final = std::__1::chrono::steady_clock::now();
             auto diferencia = tiempo_final - tiempo_inicio;
             tiemposALimpiar.at(nroDeIteracion) = std::__1::chrono::duration <double, std::__1::milli> (diferencia).count();
