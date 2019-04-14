@@ -8,7 +8,7 @@
 #include "../Solution.h"
 #include <algorithm>
 
-double MeetInTheMiddle::maximumBenefit(double capacity, std::vector<Request> *requests) {
+double MeetInTheMiddle::    maximumBenefit(double capacity, std::vector<Request> *requests) {
     KnapsackDesitionTree *bruteForce = new KnapsackDesitionTree(new BruteForce());
     std::vector<Request>::iterator last = requests->begin() + (requests->size()/2);
 
@@ -26,6 +26,22 @@ double MeetInTheMiddle::maximumBenefit(double capacity, std::vector<Request> *re
     return mergeSolutions(&firstHalfSolutions,&secondHalfSolutions, capacity);
 }
 
+void updateFirstIndexPriority(double &firstHalfIndex,double &secondHalfIndex, int firstHalfSolutionsSize){
+    if(firstHalfIndex == firstHalfSolutionsSize -1){
+        secondHalfIndex--;
+    }else{
+        firstHalfIndex++;
+    }
+}
+
+void updateSecondIndexPriority(double &firstHalfIndex,double &secondHalfIndex){
+    if(secondHalfIndex == 0){
+        firstHalfIndex++;
+    }else{
+        secondHalfIndex--;
+    }
+}
+
 double MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions,
                                     std::vector<Solution> *secondHalfSolutions,
                                     double capacity) {
@@ -37,15 +53,15 @@ double MeetInTheMiddle::mergeSolutions(std::vector<Solution> *firstHalfSolutions
     double secondHalfIndex = secondHalfSolutions->size()-1;
     double bestBenefit = -1;
     while(search){
-        if(firstHalfIndex == firstHalfSolutions->size() || secondHalfIndex == -1){
+        if(firstHalfIndex == firstHalfSolutions->size() || secondHalfIndex == -1) {
             search = false;
         }else if(firstHalfSolutions->at(firstHalfIndex).cost + secondHalfSolutions->at(secondHalfIndex).cost > capacity){
-            secondHalfIndex--;
+            updateSecondIndexPriority(firstHalfIndex,secondHalfIndex);
         }else if(firstHalfSolutions->at(firstHalfIndex).benefit + secondHalfSolutions->at(secondHalfIndex).benefit > bestBenefit){
             bestBenefit = firstHalfSolutions->at(firstHalfIndex).benefit + secondHalfSolutions->at(secondHalfIndex).benefit;
-            firstHalfIndex++;
+            updateFirstIndexPriority(firstHalfIndex,secondHalfIndex,firstHalfSolutions->size());
         }else{
-            firstHalfIndex++;
+            updateFirstIndexPriority(firstHalfIndex,secondHalfIndex,firstHalfSolutions->size());
         }
     }
     bestBenefit = bestBenefit <= 0 ? -1 : bestBenefit;
