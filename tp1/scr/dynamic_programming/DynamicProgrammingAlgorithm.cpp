@@ -30,7 +30,7 @@ bool DynamicProgrammingAlgorithm::ningunRequestPuedeEntrar(std::vector<Request>*
 
 int DynamicProgrammingAlgorithm::maximumBenefit(int capacity, std::vector<Request>* requests) {
     if(requests->size()==0){
-        return 0; // o -1??
+        return -1;
     }
     std::vector<std::vector<int> >  matrix = inicializarMatriz(requests->size()+1,capacity+1);
     // se comienza en la posicion [1][1], ya que la 1er fila y la 1er columna tienen ceros
