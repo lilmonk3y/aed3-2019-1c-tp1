@@ -1,5 +1,4 @@
 #include "DynamicProgrammingAlgorithm.h"
-#include "../Solution.h" // esta nosé
 #include <algorithm>
 
 // inicializa con ceros
@@ -19,9 +18,19 @@ int DynamicProgrammingAlgorithm::maximo(int a, int b) {
     return std::max(a,b);
 }
 
+bool DynamicProgrammingAlgorithm::ningunRequestPuedeEntrar(std::vector<Request>* requests,int maxCapacity ) {
+    for(int i = (*requests).size()-1; i >= 0; i = i-1) {
+        if ((*requests)[i].cost <= maxCapacity  ) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 int DynamicProgrammingAlgorithm::maximumBenefit(int capacity, std::vector<Request>* requests) {
     if(requests->size()==0){
-        return 0;
+        return 0; // o -1??
     }
     std::vector<std::vector<int> >  matrix = inicializarMatriz(requests->size()+1,capacity+1);
     // se comienza en la posicion [1][1], ya que la 1er fila y la 1er columna tienen ceros
@@ -44,5 +53,12 @@ int DynamicProgrammingAlgorithm::maximumBenefit(int capacity, std::vector<Reques
 
         }
     }
+    if(  matrix[cantFilas-1][cantCols-1]==0) {
+        if( ningunRequestPuedeEntrar(requests, capacity) ) {
+            return -1; // si no hay solucion, devuelvo -1
+        }
+    }
     return matrix[cantFilas-1][cantCols-1]; // ultima posicion
 }
+
+
