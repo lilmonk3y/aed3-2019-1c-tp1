@@ -8,9 +8,15 @@
 #include "../scr/meet_in_the_middle/MeetInTheMiddle.h"
 #include "../scr/brute_force/KnapsackDesitionTree.h"
 #include "../scr/brute_force/BruteForce.h"
+#include "../scr/backtracking/Backtracking.h"
+#include "../scr/dynamic_programming/DynamicProgrammingAlgorithm.h"
+
 
 int callSolution(std::vector<Request> *elements, int objectiveValue) {
-    Knapsack* knapsack = new KnapsackDesitionTree(new BruteForce());
+    //Knapsack* knapsack = new KnapsackDesitionTree(new BruteForce());
+    Knapsack* knapsack = new KnapsackDesitionTree(new Backtracking());
+    //Knapsack* knapsack = new MeetInTheMiddle();
+    //Knapsack* knapsack = new DynamicProgrammingAlgorithm();
     int response = knapsack->maximumBenefit(objectiveValue,elements);
     return response;
 }
