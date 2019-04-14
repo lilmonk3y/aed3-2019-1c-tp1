@@ -17,11 +17,12 @@ KnapsackDesitionTree::KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking) 
 int KnapsackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request> *requests) {
     this->requests = requests;
     this->capacity = capacity;
-    this->partialMaximum = 0;
+    this->partialMaximum = -1;
     this->electionTree = new std::vector<int>(requests->size());
     this->solutions = new std::set<Solution>();
 
     this->solveKnapsack(0);
+    this->partialMaximum = this->partialMaximum <= 0 ? -1 : this->partialMaximum;
     return this->partialMaximum;
 }
 

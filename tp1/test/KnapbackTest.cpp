@@ -47,7 +47,7 @@ TEST_F(KnapbackTest, whenCostIsBiggerThanCapacity_mustNotSaveSolution){
 
     int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
-    ASSERT_EQ(0, actualBenefit);
+    ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, whenHaveMultipleRequest_mustGiveCorrectBenefit){
@@ -73,7 +73,7 @@ TEST_F(KnapbackTest, whenDoesNotExistSolution_mustReturnZero){
 
     int actualBenefit = knapsack->maximumBenefit(capacity,&requests);
 
-    ASSERT_EQ(0, actualBenefit);
+    ASSERT_EQ(-1, actualBenefit);
 }
 
 TEST_F(KnapbackTest, testingScenario_01){
