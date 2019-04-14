@@ -14,7 +14,7 @@ KnapsackDesitionTree::KnapsackDesitionTree(DesitionTreeStrategy *pBacktracking) 
     this->strategy = pBacktracking;
 }
 
-int KnapsackDesitionTree::maximumBenefit(int capacity, std::__1::vector <Request> *requests) {
+int KnapsackDesitionTree::maximumBenefit(double capacity, std::__1::vector<Request> *requests) {
     this->requests = requests;
     this->capacity = capacity;
     this->partialMaximum = -1;

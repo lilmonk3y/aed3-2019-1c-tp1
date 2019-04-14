@@ -12,7 +12,7 @@ class DesitionTreeStrategy {
 public:
     virtual bool
     strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
-                             int capacity, int actualMaximum) = 0;
+                         double capacity, int actualMaximum) = 0;
 };
 
 #endif //TP1_MOCHILA_DESITIONTREESTRATEGY_H

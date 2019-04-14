@@ -11,9 +11,10 @@
 
 class MeetInTheMiddle : public Knapsack{
 public:
-    int maximumBenefit(int capacity, std::vector <Request> *requests) override ;
+    int maximumBenefit(double capacity, std::vector<Request> *requests) override ;
 
-    int mergeSolutions(std::vector<Solution> *firstHalfSolutions, std::vector<Solution> *secondHalfSolutions, int capacity);
+    int mergeSolutions(std::vector<Solution> *firstHalfSolutions, std::vector<Solution> *secondHalfSolutions,
+                       double capacity);
 };
 
 

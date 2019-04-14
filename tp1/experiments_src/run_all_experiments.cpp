@@ -240,7 +240,7 @@ int main(){
 
         originalSet = crearInstanciaConCostoYBeneficioAleatorio( tamanoMaximoInstancia,indiceCapacidad);
 
-        tiempos07 << indiceCapacidad << "," << indiceCapacidad << "," << capacidad << ",";
+        tiempos07 << tamanoMaximoInstancia << "," << tamanoMaximoInstancia << "," << indiceCapacidad << ",";
 
         double mediana;
 
@@ -266,7 +266,7 @@ int main(){
 std::vector<Request> crearInstanciaExperimento5(int cantidadDeElementos, int capacidad) {
     std::vector<Request> instancia;
     instancia.reserve(cantidadDeElementos);
-    for(int index = 1; index < cantidadDeElementos; index++){
+    for(int index = 0; index < cantidadDeElementos; index++){
         instancia.push_back(Request(std::rand() % (capacidad*2) + capacidad+1,std::rand()));
     }
     instancia.at(0) = Request(1, INT_MAX);

@@ -9,7 +9,7 @@
 
 bool
 Backtracking::strategyOptimization(int requestsIndex, std::vector<int> *electionTree, std::vector<Request> *requests,
-                                   int capacity, int actualMaximum) {
+                                   double capacity, int actualMaximum) {
     return factabilityCut(requestsIndex, electionTree, requests, capacity) &&
             optimalityCut(requestsIndex, electionTree, requests, actualMaximum);
 }
@@ -21,7 +21,7 @@ bool Backtracking::optimalityCut(int requestsIndex, std::vector<int> *electionTr
 }
 
 bool Backtracking::factabilityCut(int requestsIndex, std::vector<int> *electionTree,
-                                  std::vector<Request> *requests, int capacity) {
+                                  std::vector<Request> *requests, double capacity) {
     return sumSelectedRequestsCosts(requestsIndex, electionTree, requests) <= capacity;
 }
 
