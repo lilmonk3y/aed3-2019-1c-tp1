@@ -22,9 +22,11 @@ std::vector<Request> crearInstanciaExperimento4(int elementos, int capacidad);
 
 std::vector<Request> crearInstanciaExperimento5(int elementos, int capacidad);
 
-int randomEnRangoInt(int minimo, int maximo);
-double randomEnRangoDouble(double minimo, double maximo);
-std::vector<Request> requestsRandom(double maxPesoItem, double maxBeneficioItem, int maxCantidadElementos);
+int randomEnRangoInt(int minimo, int maximo); // implementacion abajo de todo, es un metodo auxiliar
+
+double randomEnRangoDouble(double minimo, double maximo); // implementacion abajo de todo, es un metodo auxiliar
+
+std::vector<Request> requestsRandom(double maxPesoItem, double maxBeneficioItem, int maxCantidadElementos); // implementacion abajo de todo, es un metodo auxiliar
 
 int main(){
 
