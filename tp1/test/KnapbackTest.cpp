@@ -17,7 +17,7 @@ struct KnapbackTest : testing::Test{
     KnapbackTest(){
         //knapsack = new KnapsackDesitionTree(new BruteForce());
         //knapsack = new KnapsackDesitionTree(new Backtracking());
-        //knapsack = new MeetInTheMiddle();// FALLA EN 3 test
+        //knapsack = new MeetInTheMiddle();
         knapsack = new DynamicProgrammingAlgorithm();
     }
 
